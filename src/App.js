@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import SetBudget from "./components/SetBudget";
 // import Error from "./components/Error";
 import Form from "./components/Form";
+import List from "./components/List";
 
 import "./App.css";
 
@@ -42,7 +43,9 @@ function App() {
 							<Form addNewOutcomes={addNewOutcomes} />
 						</div>
 						<div className="col bg-primary">
-							<div className="container">list of outcomes</div>
+							<div className="container">
+								<List outcomes={outcomes} />
+							</div>
 						</div>
 					</div>
 				)}
