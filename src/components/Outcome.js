@@ -3,8 +3,8 @@ const Outocome = ({ outcome }) => {
 	return (
 		<div className="container">
 			<div className="row">
-				<div className="col-10">{outcome.subject}</div>
-				<div className="col-2 float-right">$ {outcome.amount}</div>
+				<div className="col-9">{outcome.subject}</div>
+				<div className="col-3 float-right">$ {outcome.amount}</div>
 			</div>
 		</div>
 	);
