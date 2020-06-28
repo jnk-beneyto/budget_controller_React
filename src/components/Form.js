@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Error from "./Error";
 import shortid from "shortid";
 
-const Form = ({ addNewOutcomes }) => {
+const Form = ({ setOutcome, setCreateOutC }) => {
 	const [error, setError] = useState(false);
 	const [amount, setAmount] = useState(0);
 	const [subject, setSubject] = useState("");
@@ -34,7 +34,10 @@ const Form = ({ addNewOutcomes }) => {
 		};
 
 		//passing outcome to App component
-		addNewOutcomes(outcome);
+		setOutcome(outcome);
+
+		//turn true list line
+		setCreateOutC(true);
 
 		//reset form
 		setAmount(0);
@@ -43,9 +46,8 @@ const Form = ({ addNewOutcomes }) => {
 
 	return (
 		<div className="container bg-light">
-			<h3 className="text text-center my-2">Set data</h3>
+			<h3 className="text text-center my-2"> Set data </h3>{" "}
 			{error ? <Error message={"missing or incorrect data"} /> : null}
-
 			<div className="row">
 				<form onSubmit={addOutcome}>
 					<div className="form-group ml-3">
@@ -56,8 +58,8 @@ const Form = ({ addNewOutcomes }) => {
 							placeholder="f.i. : transport"
 							value={subject}
 							onChange={getSubject}
-						/>
-					</div>
+						/>{" "}
+					</div>{" "}
 					<div className="form-group ml-3">
 						<label htmlFor="amount"> Quantity: </label>{" "}
 						<input
@@ -66,13 +68,13 @@ const Form = ({ addNewOutcomes }) => {
 							placeholder={200}
 							value={amount}
 							onChange={getQuantity}
-						/>
-					</div>
+						/>{" "}
+					</div>{" "}
 					<div className="form-group pb-2 ml-3">
 						<input type="submit" value="Add" className="btn btn-primary" />
-					</div>
-				</form>
-			</div>
+					</div>{" "}
+				</form>{" "}
+			</div>{" "}
 		</div>
 	);
 };

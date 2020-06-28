@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import SetBudget from "./components/SetBudget";
 // import Error from "./components/Error";
 import Form from "./components/Form";
 import List from "./components/List";
+import BudgetControl from "./components/BudgetControl";
 
 import "./App.css";
 
@@ -16,14 +17,31 @@ function App() {
 	//showing components
 	const [showSetBudget, setShowSetBudget] = useState(true);
 
-	//setting outcomes
+	//setting outcomes array
 	const [outcomes, setOutcomes] = useState([]);
 
-	//function sent to Form in order to use there
-	const addNewOutcomes = outcome => {
-		setOutcomes([...outcomes, outcome]);
-		console.log(outcomes);
-	};
+	//setting outcome object
+	const [outcome, setOutcome] = useState({});
+
+	//control list line
+	const [createOutC, setCreateOutC] = useState(false);
+
+	useEffect(() => {
+		if (createOutC) {
+			setOutcomes([...outcomes, outcome]);
+
+			//after new outcome gets money left
+			const newDiff = diffBudget - outcome.amount;
+			console.log("diffBudget: " + diffBudget);
+			console.log("outcome.amount: " + outcome.amount);
+			console.log("newDiff: " + newDiff);
+
+			setDiffBudget(newDiff);
+		}
+
+		//set List line false
+		setCreateOutC(false);
+	}, [outcome, outcomes, createOutC, diffBudget]);
 
 	return (
 		<Fragment>
@@ -32,17 +50,23 @@ function App() {
 				{showSetBudget ? (
 					<div className="row">
 						<SetBudget
+							setShowSetBudget={setShowSetBudget}
 							setTotalBudget={setTotalBudget}
 							setDiffBudget={setDiffBudget}
-							setShowSetBudget={setShowSetBudget}
 						/>
 					</div>
 				) : (
 					<div className="row">
 						<div className="col ">
-							<Form addNewOutcomes={addNewOutcomes} />
+							<Form setOutcome={setOutcome} setCreateOutC={setCreateOutC} />
 						</div>
-						<div className="col bg-primary">
+						<div className="col bg-light">
+							<div className="container">
+								<BudgetControl
+									totalBudget={totalBudget}
+									diffBudget={diffBudget}
+								/>
+							</div>
 							<div className="container">
 								<List outcomes={outcomes} />
 							</div>
