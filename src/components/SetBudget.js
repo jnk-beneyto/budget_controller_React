@@ -34,8 +34,9 @@ const SetBudget = ({ setTotalBudget, setDiffBudget, setShowSetBudget }) => {
 			<div className="container bg-light mt-2">
 				<div className="row">
 					<div className="col-md-4 offset-md-4">
-						{error ? <Error message="There's an error" /> : null}
-					</div>
+						{" "}
+						{error ? <Error message="There's an error" /> : null}{" "}
+					</div>{" "}
 					<div className="col-md-4 offset-md-4">
 						<form onSubmit={submitBudget}>
 							<div className="form-group">
